@@ -1,7 +1,7 @@
 'use strict';
 
 var qs = require('querystring'),
-    request = require('request');
+    got = require('got');
 
 var DISTANCE_API_URL = 'https://maps.googleapis.com/maps/api/distancematrix/json?';
 
@@ -69,13 +69,13 @@ GoogleDistance.prototype.get = function(args, callback) {
 };
 
 GoogleDistance.prototype.fetchData = function(options, callback) {
-  request(DISTANCE_API_URL + qs.stringify(options), function (err, res, body) {
-    if (!err && res.statusCode == 200) {
-      var data = JSON.parse(body);
-      callback(null, data);
-    } else {
-      callback(new Error('Request error: Could not fetch data from Google\'s servers: ' + body));
+  got(DISTANCE_API_URL + qs.stringify(options), function (err, data) {
+    if (err) {
+      callback(new Error('Request error: Could not fetch data from Google\'s servers: ' + data));
     }
+
+    data = JSON.parse(data);
+    callback(null, data);
   });
 };
 
