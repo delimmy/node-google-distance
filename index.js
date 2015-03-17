@@ -67,7 +67,9 @@ var formatResults = function(data, options, callback) {
       distanceValue: element.distance.value,
       duration: element.duration.text,
       durationValue: element.duration.value,
+      inputOrigin: element.inputOrigin,
       origin: element.origin,
+      inputDestination: element.inputDestination,
       destination: element.destination,
       mode: options.mode,
       units: options.units,
@@ -82,6 +84,8 @@ var formatResults = function(data, options, callback) {
     return callback(new Error('Status error: ' + requestStatus + ': ' + data.error_message));
   }
   var results = [];
+  var inputOrigins = options.origins.split('|');
+  var inputDestinations = options.destinations.split('|');
 
   for (var i = 0; i < data.origin_addresses.length; i++) {
     for (var j = 0; j < data.destination_addresses.length; j++) {
@@ -92,6 +96,8 @@ var formatResults = function(data, options, callback) {
       }
       element.origin = data.origin_addresses[i];
       element.destination = data.destination_addresses[j];
+      element.inputOrigin = inputOrigins[i];
+      element.inputDestination = inputDestinations[j];
 
       results.push(formatData(element));
     }

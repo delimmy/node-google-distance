@@ -14,7 +14,9 @@ describe('GoogleDistance', function() {
         if (err) return done(err);
         var expectedData = {
           index: null,
+          inputOrigin: 'San Francisco, CA',
           origin: 'San Francisco, CA, USA',
+          inputDestination: 'San Diego, CA',
           destination: 'San Diego, CA, USA',
           mode: 'driving',
           units: 'metric',
@@ -52,7 +54,9 @@ describe('GoogleDistance', function() {
         if (err) return done(err);
         var expectedData = [{
           index: null,
+          inputOrigin: 'San Francisco, CA',
           origin: 'San Francisco, CA, USA',
+          inputDestination: 'San Diego, CA',
           destination: 'San Diego, CA, USA',
           mode: 'driving',
           units: 'metric',
@@ -61,7 +65,9 @@ describe('GoogleDistance', function() {
           sensor: false
         }, {
           index: null,
+          inputOrigin: 'San Francisco, CA',
           origin: 'San Francisco, CA, USA',
+          inputDestination: 'Seattle, WA',
           destination: 'Seattle, WA, USA',
           mode: 'driving',
           units: 'metric',
@@ -70,7 +76,9 @@ describe('GoogleDistance', function() {
           sensor: false
         }, {
           index: null,
+          inputOrigin: 'San Diego, CA',
           origin: 'San Diego, CA, USA',
+          inputDestination: 'San Diego, CA',
           destination: 'San Diego, CA, USA',
           mode: 'driving',
           units: 'metric',
@@ -79,7 +87,9 @@ describe('GoogleDistance', function() {
           sensor: false
         }, {
           index: null,
+          inputOrigin: 'San Diego, CA',
           origin: 'San Diego, CA, USA',
+          inputDestination: 'Seattle, WA',
           destination: 'Seattle, WA, USA',
           mode: 'driving',
           units: 'metric',
