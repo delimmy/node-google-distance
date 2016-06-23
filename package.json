@@ -21,6 +21,7 @@
     "api"
   ],
   "dependencies": {
+    "qs-google-signature": "^1.2.0",
     "request": "~2.34.0"
   },
   "devDependencies": {
