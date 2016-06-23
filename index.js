@@ -1,6 +1,6 @@
 'use strict';
 
-var qs = require('querystring'),
+var qs = require('qs-google-signature'),
     request = require('request');
 
 var DISTANCE_API_URL = 'https://maps.googleapis.com/maps/api/distancematrix/json?';
@@ -104,7 +104,7 @@ var formatResults = function(data, options, callback) {
 };
 
 var fetchData = function(options, callback) {
-  request(DISTANCE_API_URL + qs.stringify(options), function (err, res, body) {
+  request(DISTANCE_API_URL + qs.stringify(options, DISTANCE_API_URL), function (err, res, body) {
     if (!err && res.statusCode == 200) {
       var data = JSON.parse(body);
       callback(null, data);
