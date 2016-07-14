@@ -1,3 +1,4 @@
+'use strict';
 var qs =require('querystring');
 var request = require('axios');
 
