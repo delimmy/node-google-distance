@@ -21,7 +21,7 @@
     "api"
   ],
   "dependencies": {
-    "request": "~2.34.0"
+    "axios": "^0.13.0"
   },
   "devDependencies": {
     "mocha": "~1.18.2",

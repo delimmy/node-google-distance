@@ -1,7 +1,6 @@
 'use strict';
-
-var qs = require('querystring'),
-    request = require('request');
+var qs =require('querystring');
+var request = require('axios');
 
 var DISTANCE_API_URL = 'https://maps.googleapis.com/maps/api/distancematrix/json?';
 
