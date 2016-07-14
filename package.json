@@ -21,6 +21,7 @@
     "api"
   ],
   "dependencies": {
+    "axios": "^0.13.0",
     "request": "~2.34.0"
   },
   "devDependencies": {

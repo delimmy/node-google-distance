@@ -1,19 +1,17 @@
-'use strict';
+import qs from 'querystring';
+import request from 'axios';
 
-var qs = require('querystring'),
-    request = require('request');
+let DISTANCE_API_URL = 'https://maps.googleapis.com/maps/api/distancematrix/json?';
 
-var DISTANCE_API_URL = 'https://maps.googleapis.com/maps/api/distancematrix/json?';
-
-var GoogleDistance = function() {
+let GoogleDistance = function() {
   this.apiKey = '';
   this.businessClientKey = '';
   this.businessSignatureKey = '';
 };
 
 GoogleDistance.prototype.get = function(args, callback) {
-  var self = this;
-  var options = formatOptions.call(this, args);
+  let self = this;
+  let options = formatOptions.call(this, args);
   fetchData(options, function(err, data) {
     if (err) return callback(err);
     formatResults(data, options, function(err, results) {
@@ -23,8 +21,8 @@ GoogleDistance.prototype.get = function(args, callback) {
   });
 };
 
-var formatOptions = function(args) {
-  var options = {
+let formatOptions = function(args) {
+  let options = {
     index: args.index || null,
     origins: args.origin,
     destinations: args.destination,
@@ -59,8 +57,8 @@ var formatOptions = function(args) {
   return options;
 };
 
-var formatResults = function(data, options, callback) {
-  var formatData = function (element) {
+let formatResults = function(data, options, callback) {
+  let formatData = function (element) {
     return {
       index: options.index,
       distance: element.distance.text,
@@ -77,16 +75,16 @@ var formatResults = function(data, options, callback) {
     };
   };
 
-  var requestStatus = data.status;
+  let requestStatus = data.status;
   if (requestStatus != 'OK') {
     return callback(new Error('Status error: ' + requestStatus + ': ' + data.error_message));
   }
-  var results = [];
+  let results = [];
 
-  for (var i = 0; i < data.origin_addresses.length; i++) {
-    for (var j = 0; j < data.destination_addresses.length; j++) {
-      var element = data.rows[i].elements[j];
-      var resultStatus = element.status;
+  for (let i = 0; i < data.origin_addresses.length; i++) {
+    for (let j = 0; j < data.destination_addresses.length; j++) {
+      let element = data.rows[i].elements[j];
+      let resultStatus = element.status;
       if (resultStatus != 'OK') {
         return callback(new Error('Result error: ' + resultStatus));
       }
@@ -103,10 +101,10 @@ var formatResults = function(data, options, callback) {
   return callback(null, results);
 };
 
-var fetchData = function(options, callback) {
+let fetchData = function(options, callback) {
   request(DISTANCE_API_URL + qs.stringify(options), function (err, res, body) {
     if (!err && res.statusCode == 200) {
-      var data = JSON.parse(body);
+      let data = JSON.parse(body);
       callback(null, data);
     } else {
       callback(new Error('Request error: Could not fetch data from Google\'s servers: ' + body));
