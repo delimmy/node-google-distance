@@ -21,7 +21,7 @@ distance.get(
     console.log(data);
 });
 ```
-The above example outputs the following `data` object:
+The above example outputs the following `data` object. durationInTraffic and durationInTrafficValue is only available for valid Maps API key:
 ```js
 {
   index: null,
@@ -29,6 +29,8 @@ The above example outputs the following `data` object:
   distanceValue: 807366,
   duration: '7 hours 30 mins',
   durationValue: 26981,
+  durationInTraffic: '8 hours 4 mins',
+  durationInTrafficValue: 36781,
   origin: 'San Francisco, CA, USA',
   destination: 'San Diego, CA, USA',
   mode: 'driving',
@@ -73,6 +75,10 @@ Here is a full list of options you can include to tailor your query:
 * language - `'en'` (default) | [more languages](https://spreadsheets.google.com/pub?key=p9pdwsai2hDMsLkXsoM05KQ&gid=1)
 * avoid - `null` (default) | `'highways'` | `'tolls'`
 * sensor - `false` (default) | `true` | determines if GPS is used to find user location
+
+To obtain travel time with traffic:
+* departure_time - specifies the desired time of departure in seconds, defaults to current time in seconds.
+* traffic_model - `'best_guess'` (default) | `'pessimistic'` | `'pessimistic`'
 
 Note: The `units` setting only affects the text displayed within `distance` fields.
 

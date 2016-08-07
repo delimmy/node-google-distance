@@ -35,6 +35,9 @@ describe('GoogleDistance', function() {
         assert.isDefined(data.durationValue, 'Duration data is missing');
         assert.typeOf(data.durationValue, 'number', 'Duration value should be a number');
 
+        assert.isDefined(data.durationInTrafficValue, 'Duration in traffic data is missing');
+        assert.typeOf(data.durationInTrafficValue, 'number', 'Duration in traffic value should be a number');
+
         for (var key in expectedData) {
           assert.strictEqual(data[key], expectedData[key], key + ':');
         }
@@ -103,6 +106,9 @@ describe('GoogleDistance', function() {
           assert.isDefined(data[i].durationValue, 'Duration data is missing');
           assert.typeOf(data[i].durationValue, 'number', 'Duration value should be a number');
 
+          assert.isDefined(data[i].durationInTrafficValue, 'Duration in traffic data is missing');
+          assert.typeOf(data[i].durationInTrafficValue, 'number', 'Duration in traffic value should be a number');
+
           var expected = expectedData[i];
           var actual = data[i];
           for (var key in expected) {
@@ -147,6 +153,9 @@ describe('GoogleDistance', function() {
 
           assert.isDefined(data[i].durationValue, 'Duration data is missing');
           assert.typeOf(data[i].durationValue, 'number', 'Duration value should be a number');
+
+          assert.isDefined(data[i].durationInTrafficValue, 'Duration in traffic data is missing');
+          assert.typeOf(data[i].durationInTrafficValue, 'number', 'Duration in traffic value should be a number');
 
           var expected = expectedData[i];
           var actual = data[i];

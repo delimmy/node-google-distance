@@ -29,6 +29,8 @@ var formatOptions = function(args) {
     origins: args.origin,
     destinations: args.destination,
     mode: args.mode || 'driving',
+    departure_time: args.departure_time || Math.floor(new Date().getTime() / 1000),
+    traffic_model: args.traffic_model || 'best_guess',
     units: args.units || 'metric',
     language: args.language || 'en',
     avoid: args.avoid || null,
@@ -67,6 +69,10 @@ var formatResults = function(data, options, callback) {
       distanceValue: element.distance.value,
       duration: element.duration.text,
       durationValue: element.duration.value,
+      durationInTraffic: element.duration_in_traffic ?
+        element.duration_in_traffic.text: 'Unknown due to invalid API key',
+      durationInTrafficValue: element.duration_in_traffic ?
+        element.duration_in_traffic.value: 0,
       origin: element.origin,
       destination: element.destination,
       mode: options.mode,
