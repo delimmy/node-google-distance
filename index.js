@@ -78,7 +78,7 @@ var formatResults = function(data, options, callback) {
   };
 
   var requestStatus = data.status;
-  if (requestStatus != 'OK') {
+  if (requestStatus !== 'OK') {
     return callback(new Error('Status error: ' + requestStatus + ': ' + data.error_message));
   }
   var results = [];
@@ -87,7 +87,7 @@ var formatResults = function(data, options, callback) {
     for (var j = 0; j < data.destination_addresses.length; j++) {
       var element = data.rows[i].elements[j];
       var resultStatus = element.status;
-      if (resultStatus != 'OK') {
+      if (resultStatus !== 'OK') {
         return callback(new Error('Result error: ' + resultStatus));
       }
       element.origin = data.origin_addresses[i];
@@ -97,7 +97,7 @@ var formatResults = function(data, options, callback) {
     }
   }
 
-  if (results.length == 1 && !options.batchMode) {
+  if (results.length === 1 && !options.batchMode) {
     results = results[0];
   }
   return callback(null, results);
@@ -105,7 +105,7 @@ var formatResults = function(data, options, callback) {
 
 var fetchData = function(options, callback) {
   request(DISTANCE_API_URL + qs.stringify(options), function (err, res, body) {
-    if (!err && res.statusCode == 200) {
+    if (!err && res.statusCode === 200) {
       var data = JSON.parse(body);
       callback(null, data);
     } else {
