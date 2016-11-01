@@ -113,6 +113,34 @@ describe('GoogleDistance', function() {
       });
     });
 
+    it('should return the error property if there is no destination address', function(done) {
+      var options = {
+        origin: 'San Francisco, CA',
+        destination: 'qwertyqwertyqwerty' // wrong address
+      };
+
+      distance.get(options, function(err, data) {
+        if (err) return done(err);
+        var expectedData = {
+          index: null,
+          origin: 'San Francisco, CA, USA',
+          destination: '',
+          mode: 'driving',
+          units: 'metric',
+          language: 'en',
+          avoid: null,
+          sensor: false,
+          error: 'NOT_FOUND'
+        };
+
+        assert.isDefined(data.error, 'Error data is missing');
+
+        for (var key in expectedData) {
+          assert.strictEqual(data[key], expectedData[key], key + ':');
+        }
+        done();
+      });
+    });
 
     it('should return proper result when given only one origin/destination in batch mode', function(done) {
       var options = {

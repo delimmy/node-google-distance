@@ -61,12 +61,8 @@ var formatOptions = function(args) {
 
 var formatResults = function(data, options, callback) {
   var formatData = function (element) {
-    return {
+    var result = {
       index: options.index,
-      distance: element.distance.text,
-      distanceValue: element.distance.value,
-      duration: element.duration.text,
-      durationValue: element.duration.value,
       origin: element.origin,
       destination: element.destination,
       mode: options.mode,
@@ -75,10 +71,21 @@ var formatResults = function(data, options, callback) {
       avoid: options.avoid,
       sensor: options.sensor
     };
+
+    if (typeof element.error === 'undefined') {
+      result.distance = element.distance.text;
+      result.distanceValue = element.distance.value;
+      result.duration = element.duration.text;
+      result.durationValue = element.duration.value;
+    } else {
+      result.error = element.error;
+    }
+
+    return result;
   };
 
   var requestStatus = data.status;
-  if (requestStatus != 'OK') {
+  if (requestStatus !== 'OK') {
     return callback(new Error('Status error: ' + requestStatus + ': ' + data.error_message));
   }
   var results = [];
@@ -87,17 +94,16 @@ var formatResults = function(data, options, callback) {
     for (var j = 0; j < data.destination_addresses.length; j++) {
       var element = data.rows[i].elements[j];
       var resultStatus = element.status;
-      if (resultStatus != 'OK') {
-        return callback(new Error('Result error: ' + resultStatus));
+      if (resultStatus !== 'OK') {
+        element.error = resultStatus;
       }
       element.origin = data.origin_addresses[i];
       element.destination = data.destination_addresses[j];
-
       results.push(formatData(element));
     }
   }
 
-  if (results.length == 1 && !options.batchMode) {
+  if (results.length === 1 && !options.batchMode) {
     results = results[0];
   }
   return callback(null, results);
@@ -105,7 +111,7 @@ var formatResults = function(data, options, callback) {
 
 var fetchData = function(options, callback) {
   request(DISTANCE_API_URL + qs.stringify(options), function (err, res, body) {
-    if (!err && res.statusCode == 200) {
+    if (!err && res.statusCode === 200) {
       var data = JSON.parse(body);
       callback(null, data);
     } else {
