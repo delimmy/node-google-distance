@@ -77,7 +77,9 @@ var formatResults = function(data, options, callback) {
     };
   };
 
-  var requestStatus = data.status;
+
+  var requestStatus = data.status,
+      destinations = options.destinations.split('|');
   if (requestStatus != 'OK') {
     return callback(new Error('Status error: ' + requestStatus + ': ' + data.error_message));
   }
@@ -87,13 +89,14 @@ var formatResults = function(data, options, callback) {
     for (var j = 0; j < data.destination_addresses.length; j++) {
       var element = data.rows[i].elements[j];
       var resultStatus = element.status;
-      if (resultStatus != 'OK') {
-        return callback(new Error('Result error: ' + resultStatus));
-      }
-      element.origin = data.origin_addresses[i];
-      element.destination = data.destination_addresses[j];
+      if (resultStatus == 'OK') {
+          element.origin = data.origin_addresses[i];
+          element.destination = data.destination_addresses[j];
 
-      results.push(formatData(element));
+          results.push(formatData(element));
+      } else {
+        console.log('Can\'t find place information from google API for placeId: %s'.red, destinations[j]);
+      }
     }
   }
 
