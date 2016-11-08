@@ -95,7 +95,7 @@ var formatResults = function(data, options, callback) {
 
           results.push(formatData(element));
       } else {
-        console.log('Can\'t find place information from google API for placeId: %s'.red, destinations[j]);
+        console.log('Can\'t find place information from google API for destination: %s'.red, destinations[j]);
       }
     }
   }
