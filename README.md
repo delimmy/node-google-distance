@@ -78,6 +78,17 @@ Note: The `units` setting only affects the text displayed within `distance` fiel
 
 `distanceValue` is always in meters, and `durationValue` is always in seconds.
 
+## Request Options
+
+`google-distance` uses [request](https://github.com/request/request) under the
+hood. It is possible to set `requestOptions` on the module.
+
+```
+// Example
+var distance = require('google-distance');
+distance.requestOptions = { timeout: 2000 };
+```
+
 ## More Examples
 
 This example specifies `mode` and `units`:
@@ -169,6 +180,7 @@ var distance = require('google-distance');
 distance.businessClientKey = 'CLIENT_KEY';
 distance.businessSignatureKey = 'SIGNATURE_KEY';
 ```
+
 
 ## Running Tests
 
