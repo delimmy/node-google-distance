@@ -9,21 +9,22 @@ var GoogleDistance = function() {
   this.apiKey = '';
   this.businessClientKey = '';
   this.businessSignatureKey = '';
+  this.requestOptions = {};
 };
 
 GoogleDistance.prototype.get = function(args, callback) {
   var self = this;
-  var options = formatOptions.call(this, args);
-  fetchData(options, function(err, data) {
+  var options = this.formatOptions(args);
+  this.fetchData(options, function(err, data) {
     if (err) return callback(err);
-    formatResults(data, options, function(err, results) {
+    self.formatResults(data, options, function(err, results) {
       if (err) return callback(err);
       return callback(null, results);
     });
   });
 };
 
-var formatOptions = function(args) {
+GoogleDistance.prototype.formatOptions = function(args) {
   var options = {
     index: args.index || null,
     origins: args.origin,
@@ -59,7 +60,7 @@ var formatOptions = function(args) {
   return options;
 };
 
-var formatResults = function(data, options, callback) {
+GoogleDistance.prototype.formatResults = function(data, options, callback) {
   var formatData = function (element) {
     return {
       index: options.index,
@@ -103,8 +104,9 @@ var formatResults = function(data, options, callback) {
   return callback(null, results);
 };
 
-var fetchData = function(options, callback) {
-  request(DISTANCE_API_URL + qs.stringify(options), function (err, res, body) {
+GoogleDistance.prototype.fetchData = function(options, callback) {
+  var url = DISTANCE_API_URL + qs.stringify(options);
+  request(url, this.requestOptions, function (err, res, body) {
     if (!err && res.statusCode == 200) {
       var data = JSON.parse(body);
       callback(null, data);
