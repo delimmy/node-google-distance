@@ -1,18 +1,47 @@
 {
-  "name": "google-distance",
-  "version": "1.0.1",
-  "main": "index",
-  "description": "A simple node.js wrapper for Google's Distance Matrix API",
+  "_from": "google-distance@*",
+  "_id": "google-distance@1.0.1",
+  "_inBundle": false,
+  "_integrity": "sha1-iDaDRr/Yef5lo/1BzFSs6cAx6FU=",
+  "_location": "/google-distance",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "google-distance@*",
+    "name": "google-distance",
+    "escapedName": "google-distance",
+    "rawSpec": "*",
+    "saveSpec": null,
+    "fetchSpec": "*"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/google-distance/-/google-distance-1.0.1.tgz",
+  "_shasum": "88368346bfd879fe65a3fd41cc54ace9c031e855",
+  "_spec": "google-distance@*",
+  "_where": "C:\\oberon2\\Oberon-beer-locator",
   "author": {
     "name": "Edward Look",
     "email": "edwlook@gmail.com",
     "url": "http://edwardlook.com"
   },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/edwlook/node-google-distance.git"
+  "bugs": {
+    "url": "https://github.com/edwlook/node-google-distance/issues"
   },
+  "bundleDependencies": false,
+  "dependencies": {
+    "request": "~2.88.0"
+  },
+  "deprecated": false,
+  "description": "A simple node.js wrapper for Google's Distance Matrix API",
+  "devDependencies": {
+    "chai": "~4.2.0",
+    "mocha": "~6.2.1"
+  },
+  "homepage": "https://github.com/edwlook/node-google-distance#readme",
   "keywords": [
     "google",
     "maps",
@@ -20,14 +49,15 @@
     "matrix",
     "api"
   ],
-  "dependencies": {
-    "request": "~2.34.0"
-  },
-  "devDependencies": {
-    "mocha": "~1.18.2",
-    "chai": "~1.9.1"
+  "license": "MIT",
+  "main": "index",
+  "name": "google-distance",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edwlook/node-google-distance.git"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha --timeout 10000 test/*.js"
-  }
+    "test": "mocha --timeout 10000 test/*.js"
+  },
+  "version": "1.0.1"
 }
